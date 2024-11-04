@@ -1,0 +1,46 @@
+<!--
+File: index.html
+Author: Wesly Barayuga
+Date: 11/2/2024
+Purpose: This file serves as the main entry point for the Network Simulation application. 
+         It provides a user interface to visualize a dynamic mesh network where routers adapt 
+         to node and link failures. Users can observe real-time changes in network routing 
+         and interact with the simulation.
+
+Tech Stack Used:
+- HTML5: For structuring the content of the web application
+- CSS3: For styling and layout of the user interface
+- JavaScript: For implementing the simulation logic and interactivity
+- Vis.js: A JavaScript library for visualizing networks, providing a dynamic graph representation
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Simulation</title>
+    <meta name="description" content="A dynamic network simulation that demonstrates routing through a mesh network with node and link failures, allowing real-time adjustments and visualization.">
+    <link rel="stylesheet" href="https://unpkg.com/vis-network/styles/vis-network.css" /> 
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Dynamic Routing Mechanism Design in Faulty Network</h1>
+    
+    <p id="description">
+        This simulation visualizes a mesh network where routers dynamically route traffic,
+        adapting to node and link failures. Watch as the network adapts and find the shortest path
+        between routers in real-time.
+    </p>
+
+    <div id="container">
+        <div id="network"></div>
+        <div id="controls">
+            <div id="log"></div>
+            <button id="toggleButton">Pause Simulation</button> 
+        </div>
+    </div>
+    <script type="module" src="network.js"></script> 
+</body>
+</html>

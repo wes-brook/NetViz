@@ -1,0 +1,98 @@
+/* styles.css */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #141414; 
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: #ffffff;
+}
+
+h1 {
+    color: #e50914;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 90%;
+}
+
+#network {
+    width: 60%;
+    height: 600px;
+    border: 1px solid #333;
+    border-radius: 16px;
+    background-color: #222;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+#controls {
+    display: flex;
+    flex-direction: column;
+    width: 39%;
+}
+
+#log {
+    height: 508px;
+    border: 1px solid #333;
+    border-radius: 16px;
+    overflow-y: auto;
+    background-color: #222;
+    padding: 15px;
+    font-family: "Courier New", Courier, monospace;
+    color: #ffffff;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+}
+
+#log::-webkit-scrollbar {
+    width: 8px;
+}
+
+#log::-webkit-scrollbar-thumb {
+    background: #e50914;
+    border-radius: 4px;
+}
+
+#log::-webkit-scrollbar-thumb:hover {
+    background: #f40612;
+}
+
+.log-entry {
+    margin: 5px 0;
+    line-height: 1.5;
+}
+
+button {
+    background-color: #e50914;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-weight: 600;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+button:hover {
+    background-color: #f40612;
+    transform: translateY(-2px);
+}
+
+button:focus {
+    outline: none;
+}
