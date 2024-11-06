@@ -20,14 +20,17 @@ Tech Stack Used:
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Network Simulation</title>
-    <meta name="description" content="A dynamic network simulation that demonstrates routing through a mesh network with node and link failures, allowing real-time adjustments and visualization.">
-    <link rel="stylesheet" href="https://unpkg.com/vis-network/styles/vis-network.css" /> 
-    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <meta name="description" content="COMP 177 Final Project">
+    <link rel="stylesheet" href="https://unpkg.com/vis-network/styles/vis-network.css" /> <!-- Load Vis.js engine -->
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script> <!-- Load Vis.js engine -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"><!-- GitHub Icon -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="header-container">
+         <!-- Webpage header -->
         <h1>Dynamic Routing in Faulty Network</h1>
+         <!-- Webpage description -->
         <p class="header-description">
             This simulation visualizes a mesh network where routers dynamically route traffic,
             adapting to node and link failures. 
@@ -39,13 +42,22 @@ Tech Stack Used:
         <p class="header-description">
             (Link will appear blue if path exists)
         </p>
+
+        <!-- GitHub Button -->
+        <a href="https://github.com/wes-brook/Dynamic-Network-Simulator?tab=readme-ov-file" target="_blank" id="github-button" title="View GitHub Repository">
+            <i class="fab fa-github"></i>
+        </a>
     </div>
 
     <div id="container">
+         <!-- Div for network simulation view -->
         <div id="network"></div>
+         <!-- Div for user interface features -->
         <div id="controls">
+             <!-- Div for user log output -->
             <div id="log"></div>
-        
+            
+             <!-- Div for user controller -->
             <div class="control-group">
                 <div class="input-group">
                     <label for="nodeProbability">Router Failure Probability:</label>
@@ -64,8 +76,7 @@ Tech Stack Used:
         </div>
         
     </div>
+     <!-- Load our network.js script -->
     <script type="module" src="network.js"></script> 
 </body>
-
-
 </html>

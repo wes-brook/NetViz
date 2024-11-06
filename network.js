@@ -28,8 +28,11 @@
 
 import Graph from "./graph.js";
 
+var DEFAULT_NODE_FAILURE_PROB = 0.2;
+var DEFAULT_LINK_FAILURE_PROB = 0.1;
+
 class Network {
-    constructor(nodeFailureProbability = 0.2, linkFailureProbability = 0.1) {
+    constructor(nodeFailureProbability = DEFAULT_NODE_FAILURE_PROB, linkFailureProbability = DEFAULT_LINK_FAILURE_PROB) {
         this.networkGraph = new Graph();
         this.nodeFailures = {};
         this.linkFailures = {};
@@ -109,17 +112,17 @@ class Network {
 
     createNetworkEdges() {
         const edges = [
-            ['Router-1',  'Router-2', 1], 
-            ['Router-1',  'Router-3', 2],
-            ['Router-1',  'Router-4', 2], 
-            ['Router-2',  'Router-4', 3],
-            ['Router-2',  'Router-5', 2], 
-            ['Router-3',  'Router-6', 3],
-            ['Router-4',  'Router-5', 4], 
-            ['Router-4',  'Router-7', 2],
-            ['Router-5',  'Router-8', 1], 
-            ['Router-6',  'Router-8', 2],
-            ['Router-7',  'Router-9', 1], 
+            ['Router-1',  'Router-2',  1], 
+            ['Router-1',  'Router-3',  2],
+            ['Router-1',  'Router-4',  2], 
+            ['Router-2',  'Router-4',  3],
+            ['Router-2',  'Router-5',  2], 
+            ['Router-3',  'Router-6',  3],
+            ['Router-4',  'Router-5',  4], 
+            ['Router-4',  'Router-7',  2],
+            ['Router-5',  'Router-8',  1], 
+            ['Router-6',  'Router-8',  2],
+            ['Router-7',  'Router-9',  1], 
             ['Router-8',  'Router-10', 3],
             ['Router-10', 'Router-11', 1], 
             ['Router-10', 'Router-12', 2],
@@ -317,6 +320,6 @@ class Network {
 
 }
 
-//new Network();
-// Router failure probability, link failure probability 
-new Network(0.1, 0.0);
+// Initialize a new Network object to begin simulation
+new Network();
+

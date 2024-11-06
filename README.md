@@ -2,10 +2,11 @@
 
 ## Overview
 
-This project is a dynamic simulation of a mesh network, designed to demonstrate routing through a network that adapts to node and link failures. It visualizes how routers within the network automatically reconfigure and find the shortest path between specified nodes (e.g., Router-1 and Router-20). The simulation also allows users to adjust failure probabilities for both routers and links to observe the impact on routing.
+This project is a dynamic webpage simulation of a mesh network, designed to demonstrate routing through a network that adapts to node and link failures. It visualizes how routers within the network automatically reconfigure and find the shortest path between specified nodes (e.g., Router-1 and Router-20). The simulation also allows users to adjust failure probabilities for both routers and links to observe the impact on routing.
 
 ### Demo
 
+![Network Simulation Image](other/network_demo.jpg)
 Try the live demo [here](https://wes-brook.github.io/Dynamic-Network-Simulator/)!
 
 ## Features
