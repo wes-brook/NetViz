@@ -29,64 +29,108 @@
 import Graph from "./graph.js";
 
 class Network {
-    constructor() {
+    constructor(nodeFailureProbability = 0.2, linkFailureProbability = 0.1) {
         this.networkGraph = new Graph();
         this.nodeFailures = {};
         this.linkFailures = {};
-        this.isPaused = false; // Track simulation state
-        this.simulationInterval = null; // Store the interval ID
+        this.isPaused = false;
+        this.simulationInterval = null;
+        this.nodeFailureProbability = nodeFailureProbability; // Set node failure probability
+        this.linkFailureProbability = linkFailureProbability; // Set link failure probability
+
         this.initializeRouters();
         this.visualizeNetwork();
-        this.setupToggleButton(); // Set up the button event
-        this.startSimulation(); // Start the simulation
+        this.setupToggleButton();
+        this.setupProbabilityButton(); 
+        this.setupResetButton(); 
+        this.startSimulation();
     }
 
-    // Logging function to handle log updates with a consistent format
+    setupResetButton() {
+        const resetButton = document.getElementById('resetButton');
+        resetButton.addEventListener('click', () => this.resetNetwork());
+    }
+
+    resetNetwork() {
+        // Reset node and link failures to their initial state
+        for (const node in this.nodeFailures) {
+            this.nodeFailures[node] = false;
+        }
+
+        for (const link in this.linkFailures) {
+            this.linkFailures[link] = false;
+        }
+
+        // Log reset and update visualization
+        this.log("Network reset to initial state.");
+        this.visualizeNetwork();
+    }
+
+    setupProbabilityButton() {
+        const setProbabilitiesButton = document.getElementById('setProbabilitiesButton');
+        setProbabilitiesButton.addEventListener('click', () => {
+            const nodeProbInput = parseFloat(document.getElementById('nodeProbability').value);
+            const linkProbInput = parseFloat(document.getElementById('linkProbability').value);
+            
+            if (nodeProbInput >= 0 && nodeProbInput <= 1 && linkProbInput >= 0 && linkProbInput <= 1) {
+                this.nodeFailureProbability = nodeProbInput;
+                this.linkFailureProbability = linkProbInput;
+                this.log(`Node failure probability set to: ${this.nodeFailureProbability}`);
+                this.log(`Link failure probability set to: ${this.linkFailureProbability}`);
+            } else {
+                this.log("Please enter probabilities between 0 and 1.");
+            }
+        });
+    }
+
     log(message) {
         const logArea = document.getElementById('log');
-        if (message === "") {
-            logArea.innerHTML += "<br>";
-        } else {
-            logArea.innerHTML += `${this.formatDateTime(new Date())} - ${message}<br>`;
-        }
+        logArea.innerHTML += message ? `${this.formatDateTime(new Date())} - ${message}<br>` : "<br>";
         logArea.scrollTop = logArea.scrollHeight;
     }
 
-    // Format the date and time for logging
     formatDateTime(date) {
         return date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
     }
 
-    // Initialize routers in the network
     initializeRouters() {
         this.log("Initializing network...");
         const routers = Array.from({ length: 20 }, (_, i) => `Router-${i + 1}`);
 
         routers.forEach(router => {
             this.networkGraph.addVertex(router);
-            this.nodeFailures[router] = Math.random() < 0.2; // 20% failure probability
+            this.nodeFailures[router] = Math.random() < this.nodeFailureProbability; // Use adjustable failure probability
             this.log(`Node ${router} initialized with failure status: ${this.nodeFailures[router]}`);
         });
 
-        // Add edges with costs and initialize link failure probabilities
         this.createNetworkEdges();
         this.networkGraph.show();
     }
 
-    // Create network edges with failure probabilities
     createNetworkEdges() {
         const edges = [
-            ['Router-1', 'Router-2', 1], ['Router-1', 'Router-3', 2],
-            ['Router-1', 'Router-4', 2], ['Router-2', 'Router-4', 3],
-            ['Router-2', 'Router-5', 2], ['Router-3', 'Router-6', 3],
-            ['Router-4', 'Router-5', 4], ['Router-4', 'Router-7', 2],
-            ['Router-5', 'Router-8', 1], ['Router-6', 'Router-8', 2],
-            ['Router-7', 'Router-9', 1], ['Router-8', 'Router-10', 3],
-            ['Router-10', 'Router-11', 1], ['Router-10', 'Router-12', 2],
-            ['Router-11', 'Router-13', 3], ['Router-12', 'Router-14', 4],
-            ['Router-13', 'Router-15', 1], ['Router-14', 'Router-16', 2],
-            ['Router-15', 'Router-17', 3], ['Router-16', 'Router-18', 2],
-            ['Router-17', 'Router-19', 1], ['Router-18', 'Router-20', 4],
+            ['Router-1',  'Router-2', 1], 
+            ['Router-1',  'Router-3', 2],
+            ['Router-1',  'Router-4', 2], 
+            ['Router-2',  'Router-4', 3],
+            ['Router-2',  'Router-5', 2], 
+            ['Router-3',  'Router-6', 3],
+            ['Router-4',  'Router-5', 4], 
+            ['Router-4',  'Router-7', 2],
+            ['Router-5',  'Router-8', 1], 
+            ['Router-6',  'Router-8', 2],
+            ['Router-7',  'Router-9', 1], 
+            ['Router-8',  'Router-10', 3],
+            ['Router-10', 'Router-11', 1], 
+            ['Router-10', 'Router-12', 2],
+            ['Router-11', 'Router-13', 3], 
+            ['Router-12', 'Router-14', 4],
+            ['Router-13', 'Router-15', 1], 
+            ['Router-14', 'Router-16', 2],
+            ['Router-15', 'Router-17', 3], 
+            ['Router-16', 'Router-18', 2],
+            ['Router-17', 'Router-19', 1], 
+            ['Router-18', 'Router-20', 4],
             ['Router-19', 'Router-20', 2]
         ];
 
@@ -98,7 +142,7 @@ class Network {
                            this.networkGraph.graph[to].some(edge => edge.vertex === from);
         if (!edgeExists) {
             this.networkGraph.addEdge(from, to, cost);
-            this.linkFailures[`${from}-${to}`] = Math.random() < 0.1; // 10% failure probability
+            this.linkFailures[`${from}-${to}`] = Math.random() < this.linkFailureProbability; // Use adjustable failure probability
             this.log(`Link from ${from} to ${to} initialized with cost ${cost} and failure status: ${this.linkFailures[`${from}-${to}`]}`);
         } else {
             this.log(`Link between ${from} and ${to} already exists, skipping.`);
@@ -119,15 +163,15 @@ class Network {
                     this.log("No available path from Router-1 to Router-20 due to failures.");
                 }
 
-                this.visualizeNetwork(); // Update visualization after each failure check
+                this.visualizeNetwork();
             }
-        }, 5000); // Check every 5 seconds
+        }, 5000);
     }
 
     setupToggleButton() {
         const toggleButton = document.getElementById('toggleButton');
         toggleButton.addEventListener('click', () => {
-            this.isPaused = !this.isPaused; // Toggle pause state
+            this.isPaused = !this.isPaused;
             toggleButton.textContent = this.isPaused ? 'Resume Simulation' : 'Pause Simulation';
             this.log(this.isPaused ? "Simulation paused." : "Simulation resumed.");
         });
@@ -135,8 +179,8 @@ class Network {
 
     checkNodeFailures() {
         for (const node in this.nodeFailures) {
-            if (Math.random() < 0.1) { // 10% chance of failure each check
-                this.nodeFailures[node] = !this.nodeFailures[node]; // Toggle state
+            if (Math.random() < this.nodeFailureProbability) { // Use adjustable failure probability
+                this.nodeFailures[node] = !this.nodeFailures[node];
                 this.log(`${node} failure status updated to: ${this.nodeFailures[node]}`);
             }
         }
@@ -144,8 +188,8 @@ class Network {
 
     checkLinkFailures() {
         for (const link in this.linkFailures) {
-            if (Math.random() < 0.05) { // 5% chance of failure each check
-                this.linkFailures[link] = !this.linkFailures[link]; // Toggle state
+            if (Math.random() < this.linkFailureProbability) { // Use adjustable failure probability
+                this.linkFailures[link] = !this.linkFailures[link];
                 this.log(`Link ${link} failure status updated to: ${this.linkFailures[link]}`);
             }
         }
@@ -216,12 +260,18 @@ class Network {
         const nodes = new vis.DataSet();
         const edges = new vis.DataSet();
     
+        // Find the current path from Router-1 to Router-20
+        const path = this.findShortestPath('Router-1', 'Router-20');
+        const pathSet = new Set(path || []);  // Convert to Set for easier lookup if path exists
+    
+        // Add nodes with color highlighting based on their failure status and path inclusion
         for (const vertex in this.networkGraph.graph) {
             const isFailed = this.nodeFailures[vertex];
+            const isInPath = pathSet.has(vertex);  // Check if this node is in the path
             nodes.add({
                 id: vertex,
                 label: vertex,
-                color: isFailed ? 'red' : 'green',
+                color: isFailed ? 'red' : (isInPath ? 'LimeGreen' : 'green'),
                 shadow: {
                     enabled: true,
                     color: 'rgba(0,0,0,0.5)', 
@@ -233,14 +283,23 @@ class Network {
             });
         }
     
-        const seenEdges = new Set(); // Keep track of edges already added to prevent duplicates
+        const seenEdges = new Set(); // Track edges to prevent duplicates
         for (const vertex in this.networkGraph.graph) {
             for (const edge of this.networkGraph.graph[vertex]) {
                 const linkKey = `${vertex}-${edge.vertex}`;
-                const reverseKey = `${edge.vertex}-${vertex}`; // For undirected edge check
+                const reverseKey = `${edge.vertex}-${vertex}`;  // Check for undirected edge
+    
                 if (!this.linkFailures[linkKey] && !seenEdges.has(reverseKey)) {
-                    edges.add({ from: vertex, to: edge.vertex, label: `Cost: ${edge.cost}`, smooth: { type: 'continuous', roundness: 0.5 }});
-                    seenEdges.add(linkKey); // Mark this edge as seen
+                    // Check if both ends of the edge are in the path for color highlighting
+                    const isPathEdge = pathSet.has(vertex) && pathSet.has(edge.vertex);
+                    edges.add({ 
+                        from: vertex, 
+                        to: edge.vertex, 
+                        label: `Cost: ${edge.cost}`, 
+                        color: isPathEdge ? 'blue' : undefined,  // Highlight path edges in blue
+                        smooth: { type: 'continuous', roundness: 0.5 }
+                    });
+                    seenEdges.add(linkKey);
                 }
             }
         }
@@ -255,6 +314,9 @@ class Network {
         this.log("Network visualization updated.");
         this.log("");
     }
+
 }
 
-new Network();
+//new Network();
+// Router failure probability, link failure probability 
+new Network(0.1, 0.0);

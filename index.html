@@ -26,21 +26,46 @@ Tech Stack Used:
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Dynamic Routing Mechanism Design in Faulty Network</h1>
-    
-    <p id="description">
-        This simulation visualizes a mesh network where routers dynamically route traffic,
-        adapting to node and link failures. Watch as the network adapts and find the shortest path
-        between routers in real-time.
-    </p>
+    <div id="header-container">
+        <h1>Dynamic Routing in Faulty Network</h1>
+        <p class="header-description">
+            This simulation visualizes a mesh network where routers dynamically route traffic,
+            adapting to node and link failures. 
+        </p>
+        <p class="header-description">
+            Watch as the network adapts and find the shortest path
+            between Router-1 and Router-20 in real-time.
+        </p>
+        <p class="header-description">
+            (Link will appear blue if path exists)
+        </p>
+    </div>
 
     <div id="container">
         <div id="network"></div>
         <div id="controls">
             <div id="log"></div>
-            <button id="toggleButton">Pause Simulation</button> 
+        
+            <div class="control-group">
+                <div class="input-group">
+                    <label for="nodeProbability">Router Failure Probability:</label>
+                    <input type="number" id="nodeProbability" min="0" max="1" step="0.01" value="0.2" />
+        
+                    <label for="linkProbability">Link Failure Probability:</label>
+                    <input type="number" id="linkProbability" min="0" max="1" step="0.01" value="0.1" />
+                </div>
+        
+                <div class="button-group">
+                    <button id="setProbabilitiesButton">Set Probabilities</button>
+                    <button id="toggleButton">Pause Simulation</button>
+                    <button id="resetButton">Reset Network</button>
+                </div>
+            </div>
         </div>
+        
     </div>
     <script type="module" src="network.js"></script> 
 </body>
+
+
 </html>

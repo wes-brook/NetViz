@@ -1,15 +1,16 @@
 /* styles.css */
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     background-color: #141414; 
     margin: 0;
     padding: 0;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
     color: #ffffff;
+    line-height: 1.6;
 }
 
 h1 {
@@ -17,7 +18,21 @@ h1 {
     font-size: 36px;
     font-weight: 700;
     margin-bottom: 20px;
+    text-align: left;
+}
+
+#header-container {
+    width: 20%;
     text-align: center;
+}
+
+.header-description {
+    color: #cccccc; /* A lighter color than the header for contrast */
+    font-size: 18px; /* Slightly smaller font size */
+    font-weight: 400;
+    text-align: left; /* Align with the header */
+    margin: 10px auto 30px; /* Adds space above and below */
+    line-height: 1.5;
 }
 
 #container {
@@ -25,27 +40,37 @@ h1 {
     justify-content: space-between;
     align-items: flex-start;
     width: 100%;
-    max-width: 90%;
+    max-width: 1450px;
+    padding: 20px;
+    gap: 20px;
+    box-sizing: border-box;
 }
 
 #network {
     width: 60%;
-    height: 600px;
+    height: 700px;
     border: 1px solid #333;
     border-radius: 16px;
     background-color: #222;
     box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
     overflow: hidden;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 #controls {
     display: flex;
     flex-direction: column;
-    width: 39%;
+    width: 37%;
+    gap: 15px;
+    padding: 20px;
+    background-color: #222;
+    border-radius: 16px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
 }
 
 #log {
-    height: 508px;
+    height: 400px;
     border: 1px solid #333;
     border-radius: 16px;
     overflow-y: auto;
@@ -54,7 +79,7 @@ h1 {
     font-family: "Courier New", Courier, monospace;
     color: #ffffff;
     box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
-    margin-bottom: 20px;
+    margin-top: 15px;
 }
 
 #log::-webkit-scrollbar {
@@ -70,9 +95,20 @@ h1 {
     background: #f40612;
 }
 
-.log-entry {
-    margin: 5px 0;
-    line-height: 1.5;
+label {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+input[type="number"] {
+    background-color: #333;
+    color: #ffffff;
+    border: 1px solid #555;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 button {
@@ -96,3 +132,37 @@ button:hover {
 button:focus {
     outline: none;
 }
+
+/* Layout adjustments for probability controls */
+#probability-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#toggleButton, #setProbabilitiesButton {
+    width: 100%;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+}
+
+
