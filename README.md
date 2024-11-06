@@ -1,4 +1,4 @@
-# Dynamic Network Simulation | COMP 177 Final Project :: Option 4 
+# Dynamic Network Simulation | COMP 177 Final Project
 
 ## Overview
 
@@ -27,7 +27,7 @@ Try the live demo [here](https://wes-brook.github.io/Dynamic-Network-Simulator/)
 ## How It Works
 
 1. **Visualization**: The simulation visualizes a mesh network where nodes represent routers, and links represent communication paths between routers.
-2. **Simulation Logic**: The system randomly selects routers and links to fail based on the configured failure probabilities. The network adapts in real-time, dynamically rerouting traffic (Dijkstra's Algorithm).
+2. **Simulation Logic**: The system randomly selects routers and links to fail based on the configured failure probabilities. The network adapts in real-time, dynamically rerouting traffic **(Dijkstra's Algorithm)**.
 3. **Interactivity**: Users can change the failure probabilities for both routers and links and see how this affects the overall network behavior.
 
 ## Setup Instructions
