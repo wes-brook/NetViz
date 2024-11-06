@@ -18,7 +18,7 @@ Try the live demo [here](https://wes-brook.github.io/Dynamic-Network-Simulator/)
   - Pause or reset the simulation.
 - **Shortest Path Highlighting**: Links between routers are displayed in blue if a path exists between them.
   
-## Technologies Used
+## Tech Stack
 - **HTML5**: For structuring the content and layout of the web application.
 - **CSS3**: For styling and responsive design.
 - **JavaScript**: For implementing the simulation logic and handling interactions.
