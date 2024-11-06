@@ -1,4 +1,4 @@
-# Network Simulation
+# Dynamic Network Simulation | COMP 177 Final Project :: Option 4 
 
 ## Overview
 
