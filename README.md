@@ -6,7 +6,7 @@ This project is a dynamic webpage simulation of a mesh network, designed to demo
 
 ### Demo
 
-![Network Simulation Image](other/network_demo.jpg)
+![Network Simulation Image](other/network_demo.JPG)
 Try the live demo [here](https://wes-brook.github.io/Dynamic-Network-Simulator/)!
 
 ## Features
