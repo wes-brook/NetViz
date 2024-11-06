@@ -6,7 +6,7 @@ This project is a dynamic simulation of a mesh network, designed to demonstrate 
 
 ### Demo
 
-A live demo can be found at [your demo link](https://your-website.com).
+Try the live demo [here](https://wes-brook.github.io/Dynamic-Network-Simulator/)!
 
 ## Features
 - **Real-time Network Visualization**: Watch how routers adapt to changes in the network, such as node and link failures.
