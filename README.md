@@ -1,4 +1,4 @@
-# Dynamic Network Simulation | COMP 177 Final Project
+# NetViz | Dynamic Network Simulation
 
 ## Overview
 
